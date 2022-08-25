@@ -1,0 +1,11 @@
+{
+  "name": "forum_projeto",
+  "version": "1.0.0",
+  "description": "Projeto final das diciplinas de Banco de Dados 2, Programação para Web e testes de Software",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ManoelAFJr",
+  "license": "ISC"
+}
