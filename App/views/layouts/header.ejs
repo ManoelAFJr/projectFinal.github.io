@@ -54,8 +54,13 @@
             <% } %>
            </nav>
          </div>
+         <% if (locals.currentUser) { %>
+         <div id="card">
+          <span> @<%= currentUser.username%></span>
+        </div>
+        <% } %>
       </header>
-    
+     
       <div class="container">
         <% errors.forEach(function(error) { %>
           <div class="alert alert-danger" role="alert">
@@ -68,4 +73,11 @@
             <%= info %>
           </div>
         <% }) %>
-  
+  <style>
+    #card{
+      text-align: right; 
+      margin-top: auto; 
+      padding: auto;
+      color: blueviolet;
+    }
+  </style>

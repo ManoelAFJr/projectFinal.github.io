@@ -15,6 +15,7 @@ register.post('/register', (req, res, next) =>{
   }; 
   const age = req.body.age;
   const username = req.body.username;
+  const blood = req.body.blood;
   const email = req.body.email;
   const password = req.body.password;
   const address = {
@@ -37,6 +38,7 @@ register.post('/register', (req, res, next) =>{
       name : name,
       username: username,
       age : age,
+      blood: blood,
       email: email,
       password : password,
       address : address,
@@ -60,6 +62,7 @@ register.post('/api/register', (req, res, next) =>{
   }; 
   const age = req.body.age;
   const username = req.body.username;
+  const blood = req.body.blood;
   const email = req.body.email;
   const password = req.body.password;
   const address = {
@@ -80,6 +83,7 @@ register.post('/api/register', (req, res, next) =>{
     const newUser = new User({
       name : name,
       username: username,
+      blood: blood,
       age : age,
       email: email,
       password : password,

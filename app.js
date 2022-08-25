@@ -62,7 +62,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-/* app.use('/profile',(req, res)=>{res.render('profile')}) */
 
 app.use( routerIndex );
 app.use( routerTech );
@@ -73,7 +72,6 @@ app.use( routerProfile );
 app.use( routerDelet );
 app.use( routerEdit );
 
-/* fazer a routers!!!!!!!!!! */
  
 app.listen(3000);
 

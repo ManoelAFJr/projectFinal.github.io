@@ -27,8 +27,18 @@ forum.post('/forum',  function (req, res, next) {
       next(err);
       return;
     }
-    req.flash('info', 'ok!');
     res.redirect('/forum');
+  });
+});
+
+forum.post('/api/forum',  function (req, res, next) {
+  req.user.msg = req.body.message;
+  req.user.save(function (err) {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.status(200).json(message);
   });
 });
 
