@@ -56,7 +56,7 @@
          </div>
          <% if (locals.currentUser) { %>
          <div id="card">
-          <span> @<%= currentUser.username%></span>
+          <a href="/users/<%= currentUser.username %>"> <span> @<%= currentUser.username%></span></a>
         </div>
         <% } %>
       </header>
