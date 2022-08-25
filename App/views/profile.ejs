@@ -1,0 +1,63 @@
+<%- include ('./layouts/header') %> 
+
+<div class="container" style="padding: 20px;">
+  
+  <div style="background-color: rgb(207, 63, 63);" class="d-flex align-items-center p-3 my-3 btn-danger rounded shadow-sm">
+  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="40" fill="currentColor" class="bi bi-heart-pulse-fill" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M1.475 9C2.702 10.84 4.779 12.871 8 15c3.221-2.129 5.298-4.16 6.525-6H12a.5.5 0 0 1-.464-.314l-1.457-3.642-1.598 5.593a.5.5 0 0 1-.945.049L5.889 6.568l-1.473 2.21A.5.5 0 0 1 4 9H1.475ZM.879 8C-2.426 1.68 4.41-2 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C11.59-2 18.426 1.68 15.12 8h-2.783l-1.874-4.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.88Z"/>
+  </svg>
+  <div class="lh-1">
+    <h1 class="h6 mb-0 text-white lh-1" _msthash="706771" _msttexthash="138918">Blood for life</h1>
+    <small _msthash="526591" _msttexthash="91975">Desde 2022</small>
+  </div>
+</div>
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+  <% if ((currentUser) && (currentUser.id === user.id)) { %>
+  <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+    <h6 class="border-bottom pb-2 mb-0" >Perfil <%= user.username %> </h6>
+    <div class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+      <a class="me-3 py-2 text-dark text-decoration-none" href="/delete" _msthash="1028703" _msttexthash="253617">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+          <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+          <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+        </svg> Delete</a>
+    </div>
+    <% } %> 
+  </div>
+  
+  <div class="d-flex text-muted pt-3">
+   
+    <div class="card mb-3" style="max-width: auto;">
+      <div class="row g-3">
+        <div class="col-md-3" style="margin:auto;">
+          <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="auto" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+          </svg>
+        </div>
+        <div class="col-md-7">
+          <div class="card-body">
+            <h3 class="card-title"><%= user.name.firstName %> <%= user.name.lastName %></h3>
+            <p class="card-title">Idade: <br> <%= user.age%> </p>
+            <% if ((currentUser) && (currentUser.id === user.id)) { %>
+            <p class="card-title" style="background-color: rgba(51, 1, 1, 0.185); border-radius: 5px; color: black;">
+             <strong> Email: <br> <%= user.email%> <br> Prontuario: <br> <%= user._id%> </strong></p> 
+            <% } %> 
+            <p class="card-title">Address: <br> 
+              <%= user.address.city%> <br>
+              <%= user.address.road%> <br>
+              <%= user.address.district%> <br>
+              <%= user.address.zip%> <br>
+            </p>
+            
+            <p class="card-text"><small class="text-muted"><%= user.createdAt %></small></p>
+          </div>
+        </div>
+        <span style="text-align:center; margin-top: auto; padding: auto;"> usuário que clicaram</span>
+      </div>
+    </div>
+</div>
+
+</div>
+<%- include ('./layouts/footer') %>  

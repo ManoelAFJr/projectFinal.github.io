@@ -1,0 +1,84 @@
+
+  User.findOne({email: email}, async(err, user)=>{
+    if (err){
+      return next(err);
+    }
+    if(user){
+      req.flash('error', 'User existent!');
+      return res.redirect('/register');
+    }
+
+    const newUser = new User({
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      age : age,
+      email: email,
+      password : password,
+      address : address,
+    });
+    newUser.markModified("firstName");
+    await newUser.save((err, u)=>{
+      console.log(err);
+      console.log(u)
+    })
+     newUser.save(next); 
+
+    return res.json(newUser);
+
+  }); 
+  },
+  passport.authenticate('login', {
+    successRedirect: '/',
+    failureRedirect: '/register',
+    failureFlash: true,
+  })
+
+  ///////////////////////////////////////////
+  /* userSchema.pre('save', (done)=>{
+
+  if (!this.isModified("password")) {
+      return done();
+  }
+
+  bcrypt.genSalt(SALT_ROUNDS, (err, salt)=>{
+    if(err){
+      return done(err);
+    }
+    bcrypt.hash(this.password, salt, noop, (err, hashedPassword)=>{
+      if(err){
+        return done(err);
+      }
+      this.password = hashedPassword;
+      done();
+    });
+  });
+
+});
+ */
+/* userSchema.methods.checkPassword = (guess, done)=>{
+  bcrypt.compare(guess, this.password, (err, isMatch)=>{
+    done(err, isMatch);
+  });
+} */
+
+/* userSchema.methods.name = () =>{
+    return this.username || this.firstName;
+}
+ */
+ //method para o swagger
+/* delet.post('/delete', (req, res, next)=>{
+  const email = req.body.email;
+  User.deleteOne({email: email}, (err, user)=>{
+    if (err){
+      next(err);
+      return;
+    }
+    if(!user){
+      return next(404);
+    }
+    res.status(200).json();
+    res.render('/', {user: user});
+  });
+});
+ */
