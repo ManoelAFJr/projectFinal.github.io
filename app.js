@@ -8,6 +8,8 @@ const setUpPassport = require('./config');
 const path = require('path');
 const session = require('express-session');
 const ejs = require("ejs");
+const redisClient = require('./App/data/redis');
+const RedisStore = require("connect-redis")(session);
 
 //swagger
 const swaggerUi = require('swagger-ui-express');
@@ -27,7 +29,7 @@ const routerDelet = require('./App/routers/delet'); //delete
 const { use } = require('passport');
 
 const app = express();
-
+app.set('port',process.env.PORT || 3000 );
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
 
 app.use(methodSwagger);
@@ -44,6 +46,7 @@ app.set('view engine', 'ejs');
 
 app.use(
     session({
+      store: new RedisStore({ client: redisClient }),
       secret: "LUp$Dg?,I#i&owP3=9su+OB%`JgL4muLF5YJ~{;t",
       resave: true,
       saveUninitialized: true,
@@ -72,6 +75,7 @@ app.use( routerProfile );
 app.use( routerDelet );
 app.use( routerEdit );
 
- 
-app.listen(3000);
+app.listen(app.get("port"), function () {
+  console.log("Server started on port " + app.get("port"));
+});
 
