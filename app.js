@@ -8,8 +8,8 @@ const setUpPassport = require('./config');
 const path = require('path');
 const session = require('express-session');
 const ejs = require("ejs");
-const redisClient = require('./App/data/redis');
-const RedisStore = require("connect-redis")(session);
+//const redisClient = require('./App/data/redis');
+//const RedisStore = require("connect-redis")(session);
 
 //swagger
 const swaggerUi = require('swagger-ui-express');
@@ -46,7 +46,7 @@ app.set('view engine', 'ejs');
 
 app.use(
     session({
-      store: new RedisStore({ client: redisClient }),
+      //store: new RedisStore({ client: redisClient }),
       secret: "LUp$Dg?,I#i&owP3=9su+OB%`JgL4muLF5YJ~{;t",
       resave: true,
       saveUninitialized: true,
