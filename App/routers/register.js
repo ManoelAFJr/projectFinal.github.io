@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const User = require('../model/user');
+const neo4j = require('../data/neo4j');
 
 const register = express.Router();
 
@@ -44,6 +45,9 @@ register.post('/register', (req, res, next) =>{
       address : address,
     });
     newUser.save(next);
+    const session = neo4j.session({ database: 'neo4j' });
+      session.run(`CREATE (p:Pessoa {username:"${req.body.username}"})`);
+      session.close();
   });
   
   },

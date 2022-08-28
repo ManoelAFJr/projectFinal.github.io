@@ -8,8 +8,8 @@ const setUpPassport = require('./config');
 const path = require('path');
 const session = require('express-session');
 const ejs = require("ejs");
-//const redisClient = require('./App/data/redis');
-//const RedisStore = require("connect-redis")(session);
+const redisClient = require('./App/data/redis');
+const RedisStore = require("connect-redis")(session);
 
 //swagger
 const swaggerUi = require('swagger-ui-express');
@@ -22,6 +22,7 @@ const routerForum = require('./App/routers/forum');
 const routerIndex = require('./App/routers/index');
 const routerTech = require('./App/routers/tech');
 const routerlogin = require('./App/routers/login');
+const routerDonors = require('./App/routers/relationship');
 const routerUser = require('./App/routers/register'); //create
 const routerProfile = require('./App/routers/profiles'); //read
 const routerEdit = require('./App/routers/edit'); //update
@@ -74,6 +75,7 @@ app.use( routerUser );
 app.use( routerProfile );
 app.use( routerDelet );
 app.use( routerEdit );
+app.use( routerDonors );
 
 app.listen(app.get("port"), function () {
   console.log("Server started on port " + app.get("port"));

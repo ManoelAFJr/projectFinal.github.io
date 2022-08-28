@@ -1,5 +1,6 @@
 const express = require("express");
 const edit = express.Router();
+const neo4j = require('../data/neo4j');
 const User = require('../model/user');
 
 
@@ -20,7 +21,15 @@ edit.get('/users/:username', ensureAuthenticated, function (req, res, next) {
       if (!user) {
         return next(404);
       }
-      res.render('profile', { user: user });
+      const session = neo4j.session();
+      const result = await session.run(
+           `MATCH (p:Pessoa {username:"${req.params.username}"})-[r:DOAR]->(p2:Pessoa) RETURN p2.username, r.date`
+      );
+      const persons =  (result.records || []).map(obj => {
+        return {username: obj._fields[0], date: obj._fields[1]}
+      }) 
+      session.close();
+      res.render('profile', { user: user , following: persons });
     });
   });
   

@@ -24,10 +24,15 @@
       </svg>
       <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
         <div class="d-flex justify-content-between">
-          <strong class="text-gray-dark" _msthash="1517490" _msttexthash="208481"><%= user.name.firstName || user.name.lastName %></strong>
-          <a href="/users/<%= user.username %>" _msthash="1224899" _msttexthash="78117"> Perfil</a>
+          <div>
+            <strong class="text-gray-dark" _msthash="1517490" _msttexthash="208481"><%= user.name.firstName || user.name.lastName %></strong>
+            <span class="d-block" _msthash="1078792" _msttexthash="133965">@<%= user.username %></span>
+          </div>
+          <div>
+            <a href="/users/<%= user.username %>" _msthash="1224899" _msttexthash="78117"> Perfil</a> <br>
+            <a href="/users/<%= currentUser.username %>/donate/<%= user.username %>/" > Doar </a>
+          </div>
         </div>
-        <span class="d-block" _msthash="1078792" _msttexthash="133965">@<%= user.username %></span>
       </div>
 </div>
 <% }) %> 
