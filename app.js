@@ -8,8 +8,8 @@ const setUpPassport = require('./config');
 const path = require('path');
 const session = require('express-session');
 const ejs = require("ejs");
-const redisClient = require('./App/data/redis');
-const RedisStore = require("connect-redis")(session);
+//const redisClient = require('./App/data/redis');
+//const RedisStore = require("connect-redis")(session);
 
 //swagger
 const swaggerUi = require('swagger-ui-express');
