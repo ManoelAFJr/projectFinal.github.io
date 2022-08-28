@@ -13,8 +13,8 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
-edit.get('/users/:username', ensureAuthenticated, function (req, res, next) {
-    User.findOne({ username: req.params.username }, function (err, user) {
+edit.get('/users/:username', ensureAuthenticated, async function (req, res, next) {
+    User.findOne({ username: req.params.username }, async function (err, user) {
       if (err) {
         return next(err);
       }
@@ -29,7 +29,7 @@ edit.get('/users/:username', ensureAuthenticated, function (req, res, next) {
         return {username: obj._fields[0], date: obj._fields[1]}
       }) 
       session.close();
-      res.render('profile', { user: user , following: persons });
+      res.render('profile', { user: user , donors: persons});
     });
   });
   
@@ -56,6 +56,7 @@ edit.get('/users/:username', ensureAuthenticated, function (req, res, next) {
     });
    
   edit.post('/edite', ensureAuthenticated, function (req, res, next) {
+    const originalName = req.user.username;
     req.user.username = req.body.username;
     req.user.age = req.body.age;
     req.user.address = {
@@ -68,6 +69,10 @@ edit.get('/users/:username', ensureAuthenticated, function (req, res, next) {
       if (err) {
         next(err);
         return;
+      }
+      if(originalName != req.user.username){
+        const session = neo4j.session();
+        session.run(`MATCH (p:Pessoa {username: "${originalName}"}) SET p.username = "${req.user.username}"`)
       }
       req.flash('info', 'Upgrade sucess!');
       res.redirect('/tech');
