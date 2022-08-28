@@ -44,12 +44,13 @@ register.post('/register', (req, res, next) =>{
       password : password,
       address : address,
     });
-    newUser.save(next);
-    const session = neo4j.session({ database: 'neo4j' });
-      session.run(`CREATE (p:Pessoa {username:"${req.body.username}"})`);
-      session.close();
+    newUser.save().then(async()=>{
+      const session = neo4j.session({ database: 'neo4j' });
+      await session.run(`CREATE (p:Pessoa {username:"${req.body.username}"})`);
+      await session.close();
+      next();
+    });
   });
-  
   },
   passport.authenticate('login', {
     successRedirect: '/tech',
