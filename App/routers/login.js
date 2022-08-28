@@ -1,30 +1,15 @@
 const express = require('express');
-const passport = require('passport');
+const userControll = require('../controller/userControll');
+const apiControll = require('../controller/apiControll')
 const login = express.Router();
 
 login.get('/login', function (req, res) {
     res.render('login');
   });
   
- login.post('/login',passport.authenticate('login', {
-      successRedirect: '/tech',
-      failureRedirect: '/login',
-      failureFlash: true,
-    })
-  );
+login.post('/login', userControll.log);
 
- login.get("/logout", (req, res) => {
-    req.logout(req.user, err => {
-      if(err) return next(err);
-      res.redirect("/");
-    });
-  });
-
-  login.get("/api/logout", (req, res) => {
-    req.logout(req.user, err => {
-      if(err) return next(err);
-      res.status(200).json('logout');
-    });
-  });
+login.get("/logout", userControll.exit);
+login.get("/api/logout", apiControll.apiExit);
 
 module.exports = login ;

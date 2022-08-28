@@ -1,15 +1,10 @@
 const express = require('express');
 const tech = express.Router();
+const authentic = require('../controller/authenticate');
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated(true)) {
-    next();
-  } else {
-    req.flash('info', 'You must log in to gain access!');
-    res.redirect('/');
-  }
-}
-tech.get('/tech', ensureAuthenticated,function (req, res, next) {
+const  authenticate = authentic;
+
+tech.get('/tech', authenticate , (req, res, next) =>{
   res.render('tech');
 });
 
