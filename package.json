@@ -21,6 +21,7 @@
     "express-openapi-validator": "^4.13.8",
     "express-session": "^1.17.3",
     "mongoose": "^6.5.2",
+    "neo4j-driver": "^4.4.7",
     "nodemon": "^2.0.19",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
