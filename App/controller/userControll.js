@@ -124,7 +124,7 @@ const editeUsername = async(req, res, next) =>{
     }
     const session = neo4j.session();
     const result = await session.run(
-         `MATCH (p:Pessoa {username:"${req.params.username}"})-[r:DOAR]->(p2:Pessoa) RETURN p2.username, r.date`
+         `MATCH (p:Pessoa {username:"${req.params.username}"})-[r:DOOU]->(p2:Pessoa) RETURN p2.username, r.date`
     );
     const persons =  (result.records || []).map(obj => {
       return {username: obj._fields[0], date: obj._fields[1]}
@@ -155,9 +155,9 @@ const delet = (req, res, next) =>{
 const donors = async(req, res, next) =>{
 	const session = neo4j.session();
   const result = await session.run(
-       `MATCH (p2:Pessoa{username:"${req.params.username1}"})`+
-       `OPTIONAL MATCH (p1:Pessoa{username:"${req.params.username2}"})`+
-       ` CREATE (p1)-[:DOAR {date:date()}]->(p2) `+
+       `MATCH (p1:Pessoa{username:"${req.params.username1}"})`+
+       `OPTIONAL MATCH (p2:Pessoa{username:"${req.params.username2}"})`+
+       ` CREATE (p1)-[:DOOU {date:date()}]->(p2) `+
        `RETURN p2`);
    await session.close();
   if(result.summary.counters._stats.relationshipsCreated > 0){
