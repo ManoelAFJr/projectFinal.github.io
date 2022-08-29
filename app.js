@@ -15,7 +15,7 @@ const ejs = require("ejs");
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./api.yaml');
-const methodSwagger = require('./App/controller/userController');
+const methodSwagger = require('./App/routers/apiSwagger');
 
 //routers
 const routerForum = require('./App/routers/forum');
@@ -32,8 +32,9 @@ const { use } = require('passport');
 const app = express();
 app.set('port',process.env.PORT || 3000 );
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
-
 app.use(methodSwagger);
+
+
 setUpPassport();
 app.use( bodyParser.json());
 app.use( bodyParser.urlencoded({
