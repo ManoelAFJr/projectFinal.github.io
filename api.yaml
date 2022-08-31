@@ -170,29 +170,6 @@ paths:
         default:
           description: successful operation
 
-  /api/forum:
-    post:
-      tags:
-        - user
-      summary: Submit msg
-      description: This can only be done by the logged in user.
-      operationId: submitMsg
-      parameters:
-          schema:
-            type: string
-      requestBody:
-        description: Sending a message on the forum
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Forum'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Forum'
-      responses:
-        default:
-          description: successful operation
-
 
 components:
   schemas:
@@ -271,11 +248,3 @@ components:
           type: string
           example: 58832-000 
     
-    Forum:
-     required:
-       - msg
-     type: object
-     properties:
-       msg:
-         type: string
-         example: Alguem com o tipo de sangue O-

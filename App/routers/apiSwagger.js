@@ -6,9 +6,8 @@ const apiSwagger = express.Router();
 apiSwagger.get('/api/user/:username', apiControll.apiUserUsername);
 apiSwagger.get('/api/user', apiControll.listUser);
 
-apiSwagger.post('/api/register', apiControll.apiRegister);
+
 apiSwagger.post('/api/delete/:email', apiControll.apiDelete);
 apiSwagger.post('/api/edite', apiControll.apiEdite);
-apiSwagger.post('/api/forum', apiControll.apiForum);
 
 module.exports = apiSwagger;

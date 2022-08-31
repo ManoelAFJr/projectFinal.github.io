@@ -49,17 +49,6 @@ const apiEdite = async (req, res) => {
   res.status(400).json();
 };
 
-//forum.post('/api/forum')
-const apiForum = (req, res, next) => {
-  req.user.msg = req.body.message;
-  req.user.save((err) => {
-    if (err) {
-      next(err);
-      return;
-    }
-    res.status(200).json(message);
-  });
-};
 
 //login.get("/api/logout")
 const apiExit = (req, res, next) => {
@@ -82,7 +71,7 @@ const listUser = (req, res, next) => {
 };
 
 //register.post('/api/register')
-const apiRegister = (req, res, next) => {
+const apiRegister = async (req, res, next) => {
   const name = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -124,7 +113,6 @@ const apiRegister = (req, res, next) => {
 module.exports = {
   apiDelete,
   apiEdite,
-  apiForum,
   apiUserUsername,
   apiExit,
   listUser,
