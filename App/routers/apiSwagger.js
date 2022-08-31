@@ -8,6 +8,6 @@ apiSwagger.get('/api/user', apiControll.listUser);
 
 
 apiSwagger.post('/api/delete/:email', apiControll.apiDelete);
-apiSwagger.post('/api/edite', apiControll.apiEdite);
+
 
 module.exports = apiSwagger;
