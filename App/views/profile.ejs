@@ -17,7 +17,7 @@
     <h6 class="border-bottom pb-2 mb-0" >Perfil <%= user.username %> </h6>
     <div class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
       <a class="me-3 py-2 text-dark text-decoration-none" href="/delete" _msthash="1028703" _msttexthash="253617">
-        <svg  style="color: red;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+        <svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
           <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
           <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
         </svg> Delete</a>
@@ -38,20 +38,17 @@
         </div>
         <div class="col-md-7">
           <div class="card-body">
-            <div class="row g-3">
-              <h3 class="col-md-7"><%= user.name.firstName %> <%= user.name.lastName %> </h3>
-              <h4 class="col-md-3" style="text-align: end; margin-right: auto; color: red;"> <strong> <%= user.blood %> </strong></h4>
-            </div>
-            <p class="card-title" style="color: black;">Idade: <br> <%= user.age%> </p>
+            <h3 class="card-title"><%= user.name.firstName %> <%= user.name.lastName %></h3>
+            <p class="card-title">Idade: <br> <%= user.age%> </p>
             <% if ((currentUser) && (currentUser.id === user.id)) { %>
             <p class="card-title" style="background-color: rgba(51, 1, 1, 0.185); border-radius: 5px; color: black;">
-             <strong> Email: <br> <%= user.email%> <br> Prontuario: <br> <%= user._id%> </strong></p> 
+             <strong> Email: <br> <%= user.email%> </strong></p> 
             <% } %> 
-            <p class="card-title" style="color: black;">Address: <br> 
-              City: <%= user.address.city%> <br>
-              Road: <%= user.address.road%> <br>
-              District: <%= user.address.district%> <br>
-              Zip: <%= user.address.zip%> <br>
+            <p class="card-title">Address: <br> 
+              <%= user.address.city%> <br>
+              <%= user.address.road%> <br>
+              <%= user.address.district%> <br>
+              <%= user.address.zip%> <br>
             </p>
             
             <p class="card-text"><small class="text-muted"><%= user.createdAt %></small></p>
@@ -64,6 +61,8 @@
             </div>
           <% }) %>
           
+        </div>
+        
       </div>
     </div>
 </div>

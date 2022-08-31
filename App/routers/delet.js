@@ -9,6 +9,14 @@ delet.get("/delete", authenticate, function (req, res) {
   res.render("delete");
 }); 
 
-delet.post("/delete", authenticate, userControll.delet);
+delet.post("/delete", authenticate, async(req, res, next)=>{
+  const email = req.body.email;
+  const user = await userControll.deleteUser(req.user._id, email, next);
+  if (user) {
+    req.flash("error", "User not found");
+    return res.redirect("/delete");
+  }
+  return res.redirect("/");
+});
 
 module.exports = delet;

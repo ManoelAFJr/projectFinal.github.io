@@ -5,7 +5,11 @@ const forum = express.Router();
 const authentic = require('../controller/authenticate');
 const authenticate = authentic;
 
-forum.get('/user/forum', authenticate, userControll.userForum);
+forum.get("/user/forum", authenticate, async (req, res, next) => {
+    const users = await userControll.getUsers(next);
+    res.render("forum", { users: users });
+  });
+  
 
 forum.post('/user/forum', authenticate, userControll.forum);
 

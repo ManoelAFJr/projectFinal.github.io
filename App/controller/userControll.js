@@ -4,25 +4,14 @@ const neo4j = require('../data/neo4j');
 
 
 //list users get('/user')
-const users = (req, res, next) =>{
-    User.find().sort({createdAt: 'descending'}).exec((err, users)=>{
-        if (err){
-          return next(err);
-        }
-        res.render('profiles', {users: users});
-      });
-}
-
-//list users get('/user/forum)
-const userForum = (req, res, next) =>{
-	User.find().sort({createdAt: 'descending'}).exec((err, users)=>{
-			if (err){
-				return next(err);
-			}
-			res.render('forum', {users: users});
-		});
-}
-
+const getUsers = async (errCalback) => {
+  try {
+    const users = await User.find().sort({ createdAt: "descending" });
+    return users;
+  } catch (err) {
+    errCalback(err);
+  }
+};
 //list user get('/users/:username')
 const user = async(req, res, next) =>{
 	User.findOne({ username: req.params.username }, async (err, user) =>{
@@ -135,21 +124,13 @@ const editeUsername = async(req, res, next) =>{
 }
 
 //delet delete post('/delete')
-const delet = (req, res, next) =>{
-	const email = req.body.email;
-  const id = req.body._id;
-   User.deleteOne({email: email, id: id}, (err) =>{
-     if(err){
-       next(err);
-       return
-     }
-     if(User){
-       req.flash('error', 'User not found');
-       return res.redirect('/delete');
-     }
-      return res.redirect('/');
-   });
-} 
+const deleteUser = async (id, email, errCalback) => {
+  try {
+    return await User.deleteOne({ _id: id, email: email });
+  } catch (err) {
+    errCalback(err);
+  }
+};
 
 //criando relacionamento get('/users/:username1/donate/:username2')
 const donors = async(req, res, next) =>{
@@ -197,4 +178,4 @@ const forum = (req, res, next) =>{
 }
 
 
-module.exports = { users, user, userForum, singup, edite, editeUsername, delet, donors, log, exit, forum };
+module.exports = { getUsers, user, singup, edite, editeUsername, deleteUser, donors, log, exit, forum };
