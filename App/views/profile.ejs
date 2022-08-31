@@ -38,19 +38,23 @@
         </div>
         <div class="col-md-7">
           <div class="card-body">
-            <h3 class="card-title"><%= user.name.firstName %> <%= user.name.lastName %></h3>
-            <p class="card-title">Idade: <br> <%= user.age%> </p>
+            <div class="row g-3">
+              <h3 class="col-md-7"><%= user.name.firstName %> <%= user.name.lastName %> </h3>
+              <h4 class="col-md-3" style="text-align: end; margin-right: auto; color: red;"> <strong> <%= user.blood %> </strong></h4>
+            </div>
+            <p class="card-title" style="color: black;">Idade: <br> <%= user.age%> </p>
             <% if ((currentUser) && (currentUser.id === user.id)) { %>
             <p class="card-title" style="background-color: rgba(51, 1, 1, 0.185); border-radius: 5px; color: black;">
-             <strong> Email: <br> <%= user.email%> </strong></p> 
+             <strong> Email: <br> <%= user.email%> <br> Prontuario: <br> <%= user._id%> </strong></p> 
             <% } %> 
-            <p class="card-title">Address: <br> 
-              <%= user.address.city%> <br>
-              <%= user.address.road%> <br>
-              <%= user.address.district%> <br>
-              <%= user.address.zip%> <br>
+            <strong> <%= user.blood %> </strong>
+            <p class="card-title" style="color: black;">Address: <br> 
+              City: <%= user.address.city%> <br>
+              Road: <%= user.address.road%> <br>
+              District: <%= user.address.district%> <br>
+              Zip: <%= user.address.zip%> <br>
             </p>
-            
+
             <p class="card-text"><small class="text-muted"><%= user.createdAt %></small></p>
           </div>
         </div>
